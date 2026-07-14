@@ -1326,8 +1326,15 @@
       resultCountdownInterval = null;
     }
 
+    function clearVisibleAnswerSelection() {
+      answerList.querySelectorAll("input[type='radio']").forEach((input) => {
+        input.checked = false;
+      });
+    }
+
     function moveForward() {
       clearAdvanceCountdown();
+      clearVisibleAnswerSelection();
 
       if (state.currentQuestion < questions.length - 1) {
         state.currentQuestion += 1;
@@ -1419,16 +1426,18 @@
 
       answerList.innerHTML = answerChoices.map((choice) => {
         const checked = selectedValue === choice.value ? "checked" : "";
+        const inputId = `answer-${index}-${choice.value}`;
         return `
           <div class="answer-option">
             <input
-              id="answer-${choice.value}"
+              id="${inputId}"
               type="radio"
-              name="answer"
+              name="answer-${index}"
               value="${choice.value}"
+              autocomplete="off"
               ${checked}
             />
-            <label for="answer-${choice.value}">
+            <label for="${inputId}">
               <span class="answer-score">${choice.value}</span>
               <span>${choice.label}</span>
             </label>
@@ -1436,7 +1445,7 @@
         `;
       }).join("");
 
-      answerList.querySelectorAll("input[name='answer']").forEach((input) => {
+      answerList.querySelectorAll("input[type='radio']").forEach((input) => {
         input.addEventListener("change", (event) => {
           state.answers[index] = Number(event.target.value);
           startAdvanceCountdown(index);
