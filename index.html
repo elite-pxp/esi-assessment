@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#15233b" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315233b'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-family='Arial,sans-serif' font-size='25' font-weight='700' fill='%23ffffff'%3EESI%3C/text%3E%3C/svg%3E" />
+  <title>The Educator Strength Index™</title>
+  <style>
+    :root {
+      --navy: #15233b;
+      --navy-soft: #223653;
+      --gold: #c8a15a;
+      --cream: #f7f4ee;
+      --white: #ffffff;
+      --ink: #1e293b;
+      --muted: #64748b;
+      --line: #dbe2ea;
+      --danger: #b42318;
+      --success: #067647;
+      --shadow: 0 16px 40px rgba(21, 35, 59, 0.12);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(200, 161, 90, 0.14), transparent 28rem),
+        linear-gradient(180deg, #f8fafc 0%, var(--cream) 100%);
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .app-shell {
+      width: min(100%, 1180px);
+      margin: 0 auto;
+      padding: 38px 28px 48px;
+    }
+
+    .brand-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      color: var(--white);
+      background: var(--navy);
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      box-shadow: var(--shadow);
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-size: 0.97rem;
+      color: var(--navy);
+    }
+
+    .brand-copy span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 36px;
+      padding: 8px 12px;
+      border: 1px solid rgba(21, 35, 59, 0.12);
+      border-radius: 999px;
+      color: var(--navy);
+      background: rgba(255, 255, 255, 0.8);
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+    }
+
+    .scoring-trigger {
+      border: 1px solid rgba(21, 35, 59, 0.12);
+      color: var(--navy);
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .scoring-trigger:hover,
+    .scoring-trigger:focus-visible {
+      border-color: var(--navy);
+      background: var(--white);
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(21, 35, 59, 0.08);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 42px 48px 0;
+    }
+
+    .card-body {
+      padding: 34px 48px 44px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 14px;
+      color: var(--navy);
+      font-size: clamp(2rem, 8vw, 3.4rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+
+    h2 {
+      margin-bottom: 12px;
+      color: var(--navy);
+      font-size: clamp(1.55rem, 5vw, 2.25rem);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      color: var(--navy);
+      font-size: 1.05rem;
+    }
+
+    .lead {
+      max-width: 62ch;
+      margin-bottom: 0;
+      color: #475569;
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .info-item {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: #fbfcfe;
+    }
+
+    .info-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--navy);
+    }
+
+    .info-item span {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .scale-box {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .scale-box h3 {
+      color: var(--white);
+    }
+
+    .scale-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .scale-list li {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 0.9rem;
+    }
+
+    .scale-number {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      color: var(--navy);
+      background: var(--gold);
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .button-row.sticky-actions {
+      position: static;
+      margin: 28px 0 0;
+      padding: 20px 0 0;
+      border-top: 1px solid rgba(21, 35, 59, 0.08);
+      background: transparent;
+    }
+
+    .btn {
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 13px;
+      border: 1px solid transparent;
+      font-weight: 800;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      color: var(--white);
+      background: var(--navy);
+      box-shadow: 0 10px 24px rgba(21, 35, 59, 0.2);
+    }
+
+    .btn-primary:hover {
+      background: var(--navy-soft);
+    }
+
+    .btn-secondary {
+      color: var(--navy);
+      background: var(--white);
+      border-color: var(--line);
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    .btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.52;
+      box-shadow: none;
+    }
+
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+      animation: screenIn 240ms ease;
+    }
+
+    @keyframes screenIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .progress-wrap {
+      margin-bottom: 24px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 9px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .progress-track {
+      height: 10px;
+      border-radius: 999px;
+      background: #e8edf3;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--gold), #e2bf77);
+      transition: width 240ms ease;
+    }
+
+    .question-number {
+      margin-bottom: 10px;
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .question-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(460px, 1.1fr);
+      gap: 46px;
+      align-items: start;
+    }
+
+    .question-copy {
+      position: sticky;
+      top: 28px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: #fbfcfe;
+    }
+
+    .question-copy .eyebrow {
+      margin-bottom: 14px;
+    }
+
+    .question-text {
+      min-height: 0;
+      margin-bottom: 18px;
+      color: var(--navy);
+      font-size: clamp(1.8rem, 3vw, 2.45rem);
+      line-height: 1.22;
+      letter-spacing: -0.03em;
+    }
+
+    .answer-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .answer-option {
+      position: relative;
+    }
+
+    .answer-option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .answer-option label {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-height: 58px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--white);
+      color: #334155;
+      font-weight: 700;
+      transition: border-color 150ms ease, background 150ms ease, transform 150ms ease;
+    }
+
+    .answer-option label:hover {
+      border-color: rgba(21, 35, 59, 0.34);
+      transform: translateY(-1px);
+    }
+
+    .answer-score {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      color: var(--navy);
+      background: #eef2f6;
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+
+    .answer-option input:checked + label {
+      border-color: var(--navy);
+      background: #f3f6fa;
+      box-shadow: 0 0 0 3px rgba(21, 35, 59, 0.08);
+    }
+
+    .answer-option input:checked + label .answer-score {
+      color: var(--white);
+      background: var(--navy);
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .field-group label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--navy);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .field-group input,
+    .field-group select {
+      width: 100%;
+      min-height: 50px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--ink);
+      background: var(--white);
+      outline: none;
+    }
+
+    .field-group input:focus,
+    .field-group select:focus {
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(21, 35, 59, 0.08);
+    }
+
+    .helper {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.45;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 6px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fbfcfe;
+    }
+
+    .checkbox-row input {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: var(--navy);
+    }
+
+    .checkbox-row label {
+      color: #475569;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .error-box,
+    .success-box {
+      display: none;
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .error-box {
+      color: var(--danger);
+      background: #fff1f0;
+      border: 1px solid #fecdca;
+    }
+
+    .success-box {
+      color: var(--success);
+      background: #ecfdf3;
+      border: 1px solid #abefc6;
+    }
+
+    .calculation-panel {
+      display: grid;
+      justify-items: center;
+      min-height: 460px;
+      padding: 72px 32px;
+      text-align: center;
+    }
+
+    .calculation-spinner {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: 116px;
+      height: 116px;
+      margin-bottom: 30px;
+      border-radius: 50%;
+      color: var(--navy);
+      background: var(--white);
+      box-shadow: 0 0 0 12px rgba(200, 161, 90, 0.12);
+    }
+
+    .calculation-spinner::before {
+      content: "";
+      position: absolute;
+      inset: -12px;
+      border: 5px solid rgba(21, 35, 59, 0.1);
+      border-top-color: var(--gold);
+      border-right-color: var(--navy);
+      border-radius: 50%;
+      animation: calculate-spin 1s linear infinite;
+    }
+
+    .calculation-countdown {
+      font-size: 2.5rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .calculation-panel .lead {
+      max-width: 44ch;
+      text-align: center;
+    }
+
+    .form-intro {
+      margin: 34px 0 0;
+      padding-top: 30px;
+      border-top: 1px solid var(--line);
+    }
+
+    .field-span-two {
+      grid-column: 1 / -1;
+    }
+
+    .result-field {
+      font-weight: 800;
+      color: var(--navy) !important;
+      background: #f3f6fa !important;
+      border-color: rgba(21, 35, 59, 0.2) !important;
+    }
+
+    @keyframes calculate-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .result-hero {
+      padding: 26px;
+      border-radius: 20px;
+      color: var(--white);
+      background: var(--profile-color, var(--navy));
+    }
+
+    .result-label {
+      margin-bottom: 8px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .result-title {
+      margin-bottom: 10px;
+      color: var(--white);
+      font-size: clamp(1.9rem, 7vw, 3rem);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .result-hero p {
+      margin-bottom: 0;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.6;
+    }
+
+    .score-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 26px;
+    }
+
+    .score-row {
+      display: block;
+      padding: 0;
+    }
+
+    .score-row-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 7px;
+    }
+
+    .score-name-wrap {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      gap: 8px;
+    }
+
+    .score-name {
+      color: var(--navy);
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .score-meta {
+      color: var(--muted);
+      font-size: 0.74rem;
+      white-space: nowrap;
+    }
+
+    .score-value {
+      color: var(--navy);
+      font-size: 0.82rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .score-swatch {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--score-color);
+      flex: 0 0 auto;
+    }
+
+    .score-track {
+      height: 7px;
+      border-radius: 999px;
+      background: #e8edf3;
+      overflow: hidden;
+    }
+
+    .score-fill {
+      width: var(--score-width);
+      height: 100%;
+      border-radius: inherit;
+      background: var(--score-color);
+      transition: width 500ms ease;
+    }
+
+    .privacy-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.55;
+    }
+
+    .footer-note {
+      padding: 18px 6px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.5;
+    }
+
+    .footer-link {
+      margin-left: 5px;
+      padding: 0;
+      border: 0;
+      color: var(--navy);
+      background: transparent;
+      font-weight: 800;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .scoring-dialog {
+      width: min(calc(100% - 32px), 680px);
+      max-height: min(86vh, 760px);
+      margin: auto;
+      padding: 0;
+      border: 1px solid rgba(21, 35, 59, 0.12);
+      border-radius: 22px;
+      color: var(--ink);
+      background: var(--white);
+      box-shadow: 0 24px 80px rgba(21, 35, 59, 0.3);
+      overflow: auto;
+    }
+
+    .scoring-dialog::backdrop {
+      background: rgba(15, 23, 42, 0.64);
+      backdrop-filter: blur(4px);
+    }
+
+    .scoring-dialog-inner {
+      position: relative;
+      padding: 38px;
+    }
+
+    .dialog-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--navy);
+      background: var(--white);
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+
+    .scoring-steps {
+      margin: 24px 0;
+      padding-left: 22px;
+      color: #475569;
+    }
+
+    .scoring-steps li {
+      margin-bottom: 12px;
+      padding-left: 6px;
+      line-height: 1.55;
+    }
+
+    .color-key {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .color-key li {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      color: var(--navy);
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .color-swatch {
+      width: 13px;
+      height: 13px;
+      border-radius: 4px;
+      background: var(--swatch-color);
+      flex: 0 0 auto;
+    }
+
+    .scoring-note {
+      margin-top: 24px;
+      padding: 15px 16px;
+      border-radius: 12px;
+      color: var(--navy);
+      background: #f3f6fa;
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .info-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .scale-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .field-grid.two-column {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 920px) {
+      .app-shell {
+        padding: 24px 18px 36px;
+      }
+
+      .card-header {
+        padding: 32px 28px 0;
+      }
+
+      .card-body {
+        padding: 28px;
+      }
+
+      .question-layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .question-copy {
+        position: static;
+      }
+
+      .info-grid,
+      .scale-list,
+      .field-grid.two-column,
+      .score-list,
+      .color-key {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .brand-bar {
+        align-items: flex-start;
+      }
+
+      .brand-actions {
+        flex-direction: column-reverse;
+        align-items: flex-end;
+      }
+
+      .scoring-dialog-inner {
+        padding: 34px 22px 28px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app-shell">
+    <div class="brand-bar">
+      <div class="brand-lockup" aria-label="Educator Strength Index">
+        <div class="brand-mark" aria-hidden="true">ESI</div>
+        <div class="brand-copy">
+          <strong>Educator Strength Index™</strong>
+          <span>Professional Educator Assessment</span>
+        </div>
+      </div>
+      <div class="brand-actions">
+        <button class="status-pill scoring-trigger" type="button" data-open-scoring aria-haspopup="dialog">
+          How scoring works
+        </button>
+        <div class="status-pill">
+          <span class="status-dot" aria-hidden="true"></span>
+          40 Questions
+        </div>
+      </div>
+    </div>
+
+    <section id="welcomeScreen" class="screen active">
+      <div class="card">
+        <div class="card-header">
+          <p class="eyebrow">Educator Personality Assessment</p>
+          <h1>Discover your educator strengths.</h1>
+          <p class="lead">
+            This assessment is designed to identify the natural strengths you bring to your classroom, your team, and the children and families you serve.
+          </p>
+        </div>
+        <div class="card-body">
+          <div class="info-grid">
+            <div class="info-item">
+              <strong>40 statements</strong>
+              <span>Answer based on how you usually think and work.</span>
+            </div>
+            <div class="info-item">
+              <strong>About 5 to 7 minutes</strong>
+              <span>Select one response for every statement.</span>
+            </div>
+            <div class="info-item">
+              <strong>No right or wrong answers</strong>
+              <span>Choose the response that feels most honest.</span>
+            </div>
+          </div>
+
+          <div class="scale-box">
+            <h3>Rating scale</h3>
+            <ul class="scale-list">
+              <li><span class="scale-number">1</span>Strongly Disagree</li>
+              <li><span class="scale-number">2</span>Disagree</li>
+              <li><span class="scale-number">3</span>Neutral</li>
+              <li><span class="scale-number">4</span>Agree</li>
+              <li><span class="scale-number">5</span>Strongly Agree</li>
+            </ul>
+          </div>
+
+          <p class="privacy-note">
+            Your name and contact information will be requested after the final statement. Your scores are calculated automatically.
+          </p>
+
+          <div class="button-row">
+            <button id="startButton" class="btn btn-primary btn-full" type="button">Begin Assessment</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="questionScreen" class="screen" aria-live="polite">
+      <div class="card">
+        <div class="card-body">
+          <div class="progress-wrap">
+            <div class="progress-meta">
+              <span id="progressText">1 / 40</span>
+              <span id="progressPercent">3%</span>
+            </div>
+            <div class="progress-track" aria-hidden="true">
+              <div id="progressBar" class="progress-bar"></div>
+            </div>
+          </div>
+
+          <div class="question-layout">
+            <div class="question-copy">
+              <p class="eyebrow">Educator Personality Assessment</p>
+              <h2 id="questionText" class="question-text"></h2>
+              <p class="helper">Choose the answer that best describes you most of the time. You can select Next immediately, or wait five seconds for the assessment to continue automatically.</p>
+            </div>
+
+            <div>
+              <div id="answerList" class="answer-list" role="radiogroup" aria-label="Answer choices"></div>
+
+              <div class="button-row sticky-actions">
+                <button id="backButton" class="btn btn-secondary" type="button">Back</button>
+                <button id="nextButton" class="btn btn-primary" type="button" disabled>Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="calculatingScreen" class="screen" aria-live="polite" aria-busy="true">
+      <div class="card">
+        <div class="calculation-panel">
+          <div class="calculation-spinner" aria-hidden="true">
+            <span id="calculationCountdown" class="calculation-countdown">3</span>
+          </div>
+          <p class="eyebrow">Assessment Complete</p>
+          <h2>Calculating your results...</h2>
+          <p id="calculationStatus" class="lead">Reviewing your 40 responses across five educator strengths.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="detailsScreen" class="screen">
+      <div class="card">
+        <div class="card-header">
+          <p class="eyebrow">Your Strength Profile</p>
+          <h2>Your results are ready.</h2>
+          <p class="lead">
+            Review your result, then enter your information to receive a copy by email.
+          </p>
+        </div>
+        <div class="card-body">
+          <div id="previewResultHero" class="result-hero">
+            <div class="result-label">Primary Educator Strength</div>
+            <h3 id="previewPrimaryTitle" class="result-title"></h3>
+            <p id="previewPrimaryDescription"></p>
+          </div>
+
+          <div class="score-list" id="previewScoreList"></div>
+
+          <div class="form-intro">
+            <p class="eyebrow">Send My Results</p>
+            <h3>Where should we send your result?</h3>
+            <p class="lead" style="font-size: 0.94rem;">Your result is already filled in below. Complete the remaining fields and press send.</p>
+          </div>
+
+          <form id="participantForm" novalidate>
+            <div class="field-grid two-column">
+              <div class="field-group field-span-two">
+                <label for="esiResult">Educator Strength Result</label>
+                <input id="esiResult" class="result-field" name="esiResult" type="text" readonly required aria-readonly="true" />
+                <p class="helper">This text field will map directly to your GoHighLevel contact custom field.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="fullName">Full Name</label>
+                <input id="fullName" name="fullName" type="text" autocomplete="name" required />
+              </div>
+
+              <div class="field-group">
+                <label for="email">Email Address for Your Results</label>
+                <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required />
+                <p class="helper">We will send your primary strength and category scores to this address.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="school">School</label>
+                <select id="school" name="school" required>
+                  <option value="">Select your school</option>
+                  <option value="Austell">Austell</option>
+                  <option value="Mableton">Mableton</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label for="position">Position</label>
+                <select id="position" name="position" required>
+                  <option value="">Select your position</option>
+                  <option value="Teacher">Teacher</option>
+                  <option value="Lead Teacher">Lead Teacher</option>
+                  <option value="Assistant Teacher">Assistant Teacher</option>
+                  <option value="Director">Director</option>
+                  <option value="Assistant Director">Assistant Director</option>
+                  <option value="Administrator">Administrator</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label for="experience">Years of Experience</label>
+                <select id="experience" name="experience" required>
+                  <option value="">Select a range</option>
+                  <option value="Less than 1 year">Less than 1 year</option>
+                  <option value="1 to 2 years">1 to 2 years</option>
+                  <option value="3 to 5 years">3 to 5 years</option>
+                  <option value="6 to 10 years">6 to 10 years</option>
+                  <option value="11 to 15 years">11 to 15 years</option>
+                  <option value="16 years or more">16 years or more</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="checkbox-row">
+              <input id="honestyCheck" name="honestyCheck" type="checkbox" required />
+              <label for="honestyCheck">I confirm that I answered the assessment honestly and completed all 40 statements.</label>
+            </div>
+
+            <div id="formError" class="error-box" role="alert"></div>
+            <div id="formSuccess" class="success-box" role="status"></div>
+
+            <div class="button-row sticky-actions">
+              <button id="reviewBackButton" class="btn btn-secondary" type="button">Back</button>
+              <button id="submitButton" class="btn btn-primary" type="submit">Send My Results</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <p class="footer-note">
+      The Educator Strength Index™ is a professional self-reflection assessment for educators.
+      <button class="footer-link" type="button" data-open-scoring aria-haspopup="dialog">How are results calculated?</button>
+    </p>
+  </main>
+
+  <dialog id="scoringDialog" class="scoring-dialog" aria-labelledby="scoringDialogTitle">
+    <div class="scoring-dialog-inner">
+      <button id="closeScoringDialog" class="dialog-close" type="button" aria-label="Close scoring explanation">×</button>
+      <p class="eyebrow">Scoring FAQ</p>
+      <h2 id="scoringDialogTitle">How is my result calculated?</h2>
+      <p class="lead">The assessment produces one primary educator-strength result from your 40 responses.</p>
+
+      <ol class="scoring-steps">
+        <li>Each response receives a value from 1 for <strong>Strongly Disagree</strong> to 5 for <strong>Strongly Agree</strong>.</li>
+        <li>Each strength has eight assigned questions. Those eight values are added to create a category score from 8 to 40.</li>
+        <li>The category with the highest total becomes your one primary result.</li>
+        <li>If totals are tied, the assessment compares the number of 5 responses, then 4s, 3s, 2s, and 1s.</li>
+        <li>If the full response patterns are still identical, a fixed order is used: Relationship Builder, Innovative Educator, Inspirational Leader, Strategic Planner, then Growth Champion.</li>
+      </ol>
+
+      <h3>Strength and color identities</h3>
+      <ul class="color-key">
+        <li><span class="color-swatch" style="--swatch-color:#2463a9;"></span>Relationship Builder (Blue)</li>
+        <li><span class="color-swatch" style="--swatch-color:#2f7d5a;"></span>Innovative Educator (Green)</li>
+        <li><span class="color-swatch" style="--swatch-color:#a83b3b;"></span>Inspirational Leader (Red)</li>
+        <li><span class="color-swatch" style="--swatch-color:#c8a15a;"></span>Strategic Planner (Gold)</li>
+        <li><span class="color-swatch" style="--swatch-color:#7253a6;"></span>Growth Champion (Purple)</li>
+      </ul>
+
+      <div class="scoring-note">Only the top-ranked category is your result. The five score cards are shown only as a transparent breakdown of the calculation.</div>
+    </div>
+  </dialog>
+
+  <script>
+    "use strict";
+
+    const AUTO_ADVANCE_SECONDS = 5;
+    const RESULT_COUNTDOWN_SECONDS = 3;
+
+    const questions = [
+      "I enjoy making learning engaging and memorable.",
+      "People naturally come to me when they need advice or support.",
+      "I like having a clear plan before beginning a project.",
+      "I often think about how something could be improved.",
+      "I set high expectations for myself.",
+      "I enjoy helping others feel included.",
+      "I stay calm when unexpected challenges arise.",
+      "I naturally step up when leadership is needed.",
+      "I enjoy creating new ideas rather than repeating old ones.",
+      "I notice when something is out of place or needs attention.",
+      "Seeing others succeed brings me genuine joy.",
+      "I enjoy solving problems that others avoid.",
+      "I work best when I have goals to accomplish.",
+      "I enjoy brainstorming with others.",
+      "I naturally build strong relationships with children and families.",
+      "I do not mind taking responsibility for difficult decisions.",
+      "I enjoy creating systems that make work easier.",
+      "I adapt quickly when plans change.",
+      "I enjoy encouraging people who are struggling.",
+      "I am always looking for ways to improve my skills.",
+      "I enjoy organizing materials, schedules, or routines.",
+      "I often see possibilities that others overlook.",
+      "People describe me as dependable.",
+      "I enjoy helping people discover their strengths.",
+      "I enjoy challenging myself to grow professionally.",
+      "I prefer finding solutions instead of focusing on problems.",
+      "I enjoy inspiring others to do their best.",
+      "I remember details about people that help build relationships.",
+      "I enjoy turning ideas into action.",
+      "I enjoy experimenting with different approaches.",
+      "I remain focused even during stressful situations.",
+      "I enjoy mentoring or coaching others.",
+      "I often take initiative without being asked.",
+      "I enjoy measuring progress toward a goal.",
+      "I enjoy creating experiences that people remember.",
+      "I naturally look for the most efficient way to complete a task.",
+      "I enjoy working collaboratively with a team.",
+      "I enjoy learning new skills that help me grow.",
+      "I often ask, “Is there a better way to do this?”",
+      "I believe every challenge is an opportunity to learn."
+    ];
+
+    const answerChoices = [
+      { value: 1, label: "Strongly Disagree" },
+      { value: 2, label: "Disagree" },
+      { value: 3, label: "Neutral" },
+      { value: 4, label: "Agree" },
+      { value: 5, label: "Strongly Agree" }
+    ];
+
+    const categories = {
+      relationshipBuilder: {
+        label: "Relationship Builder",
+        colorName: "Blue",
+        color: "#2463a9",
+        questions: [2, 6, 11, 15, 19, 24, 28, 37],
+        description: "You naturally create meaningful connections with children, families, and coworkers. People often feel included, supported, and understood when working with you."
+      },
+      inspirationalLeader: {
+        label: "Inspirational Leader",
+        colorName: "Red",
+        color: "#a83b3b",
+        questions: [7, 8, 12, 16, 27, 31, 32, 33],
+        description: "You step forward when direction is needed. You encourage others, handle responsibility, and help your team stay steady during demanding moments."
+      },
+      innovativeEducator: {
+        label: "Innovative Educator",
+        colorName: "Green",
+        color: "#2f7d5a",
+        questions: [1, 9, 14, 22, 29, 30, 35, 39],
+        description: "You enjoy creating fresh learning experiences, testing new approaches, and finding better ways to turn ideas into meaningful classroom moments."
+      },
+      strategicPlanner: {
+        label: "Strategic Planner",
+        colorName: "Gold",
+        color: "#9a6f21",
+        questions: [3, 10, 13, 17, 21, 23, 34, 36],
+        description: "You bring order, consistency, and direction to your work. Clear plans, dependable systems, and steady progress help you and your team succeed."
+      },
+      growthChampion: {
+        label: "Growth Champion",
+        colorName: "Purple",
+        color: "#7253a6",
+        questions: [4, 5, 18, 20, 25, 26, 38, 40],
+        description: "You value learning, improvement, and perseverance. You look for lessons in challenges and encourage continued growth in yourself and others."
+      }
+    };
+
+    // Final deterministic fallback when two categories have the same score
+    // and the same response-intensity pattern.
+    const CATEGORY_TIE_BREAK_PRIORITY = [
+      "relationshipBuilder",
+      "innovativeEducator",
+      "inspirationalLeader",
+      "strategicPlanner",
+      "growthChampion"
+    ];
+
+    const screens = {
+      welcome: document.getElementById("welcomeScreen"),
+      question: document.getElementById("questionScreen"),
+      calculating: document.getElementById("calculatingScreen"),
+      details: document.getElementById("detailsScreen")
+    };
+
+    const startButton = document.getElementById("startButton");
+    const backButton = document.getElementById("backButton");
+    const nextButton = document.getElementById("nextButton");
+    const reviewBackButton = document.getElementById("reviewBackButton");
+    const participantForm = document.getElementById("participantForm");
+    const submitButton = document.getElementById("submitButton");
+    const scoringDialog = document.getElementById("scoringDialog");
+    const closeScoringDialog = document.getElementById("closeScoringDialog");
+    const scoringTriggers = document.querySelectorAll("[data-open-scoring]");
+
+    const questionText = document.getElementById("questionText");
+    const answerList = document.getElementById("answerList");
+    const progressText = document.getElementById("progressText");
+    const progressPercent = document.getElementById("progressPercent");
+    const progressBar = document.getElementById("progressBar");
+    const calculationCountdown = document.getElementById("calculationCountdown");
+    const calculationStatus = document.getElementById("calculationStatus");
+    const esiResult = document.getElementById("esiResult");
+
+    const formError = document.getElementById("formError");
+    const formSuccess = document.getElementById("formSuccess");
+
+    let advanceTimer = null;
+    let countdownInterval = null;
+    let resultCountdownInterval = null;
+    let latestResults = null;
+
+    let state = {
+      currentQuestion: 0,
+      answers: Array(questions.length).fill(null),
+      participant: {}
+    };
+
+    function showScreen(name) {
+      Object.values(screens).forEach((screen) => screen.classList.remove("active"));
+      screens[name].classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function clearAdvanceCountdown() {
+      window.clearTimeout(advanceTimer);
+      window.clearInterval(countdownInterval);
+      advanceTimer = null;
+      countdownInterval = null;
+    }
+
+    function clearResultCountdown() {
+      window.clearInterval(resultCountdownInterval);
+      resultCountdownInterval = null;
+    }
+
+    function moveForward() {
+      clearAdvanceCountdown();
+
+      if (state.currentQuestion < questions.length - 1) {
+        state.currentQuestion += 1;
+        renderQuestion();
+      } else {
+        startResultCalculation();
+      }
+    }
+
+    function startResultCalculation() {
+      clearAdvanceCountdown();
+      clearResultCountdown();
+
+      try {
+        latestResults = calculateScores(state.answers);
+      } catch (error) {
+        formError.textContent = error.message;
+        formError.style.display = "block";
+        restoreParticipantFields();
+        showScreen("details");
+        return;
+      }
+
+      let remaining = RESULT_COUNTDOWN_SECONDS;
+      const statusMessages = {
+        3: "Reviewing your 40 responses across five educator strengths.",
+        2: "Comparing your category scores.",
+        1: "Preparing your personalized strength profile."
+      };
+
+      calculationCountdown.textContent = remaining;
+      calculationStatus.textContent = statusMessages[remaining];
+      showScreen("calculating");
+
+      resultCountdownInterval = window.setInterval(() => {
+        remaining -= 1;
+
+        if (remaining > 0) {
+          calculationCountdown.textContent = remaining;
+          calculationStatus.textContent = statusMessages[remaining];
+          return;
+        }
+
+        clearResultCountdown();
+        renderPreSubmissionResults(latestResults);
+        restoreParticipantFields();
+        showScreen("details");
+      }, 1000);
+    }
+
+    function startAdvanceCountdown(index) {
+      clearAdvanceCountdown();
+
+      let remaining = AUTO_ADVANCE_SECONDS;
+      const actionLabel = index === questions.length - 1 ? "Continue" : "Next";
+
+      nextButton.disabled = false;
+      nextButton.textContent = `${actionLabel} in ${remaining}s`;
+
+      countdownInterval = window.setInterval(() => {
+        if (state.currentQuestion !== index) {
+          clearAdvanceCountdown();
+          return;
+        }
+
+        remaining -= 1;
+
+        if (remaining > 0) {
+          nextButton.textContent = `${actionLabel} in ${remaining}s`;
+          return;
+        }
+
+        clearAdvanceCountdown();
+        moveForward();
+      }, 1000);
+    }
+
+    function renderQuestion() {
+      clearAdvanceCountdown();
+
+      const index = state.currentQuestion;
+      const selectedValue = state.answers[index];
+      const percent = Math.round(((index + 1) / questions.length) * 100);
+
+      questionText.textContent = questions[index];
+      progressText.textContent = `${index + 1} / ${questions.length}`;
+      progressPercent.textContent = `${percent}%`;
+      progressBar.style.width = `${percent}%`;
+
+      answerList.innerHTML = answerChoices.map((choice) => {
+        const checked = selectedValue === choice.value ? "checked" : "";
+        return `
+          <div class="answer-option">
+            <input
+              id="answer-${choice.value}"
+              type="radio"
+              name="answer"
+              value="${choice.value}"
+              ${checked}
+            />
+            <label for="answer-${choice.value}">
+              <span class="answer-score">${choice.value}</span>
+              <span>${choice.label}</span>
+            </label>
+          </div>
+        `;
+      }).join("");
+
+      answerList.querySelectorAll("input[name='answer']").forEach((input) => {
+        input.addEventListener("change", (event) => {
+          state.answers[index] = Number(event.target.value);
+          startAdvanceCountdown(index);
+        });
+      });
+
+      backButton.disabled = index === 0;
+      nextButton.disabled = selectedValue === null;
+      nextButton.textContent = index === questions.length - 1 ? "Continue" : "Next";
+    }
+
+    function calculateScores(answers) {
+      validateAssessmentStructure();
+
+      if (!Array.isArray(answers) || answers.length !== questions.length) {
+        throw new Error("Assessment answers are incomplete.");
+      }
+
+      answers.forEach((value, index) => {
+        if (!Number.isInteger(value) || value < 1 || value > 5) {
+          throw new Error(`Question ${index + 1} has an invalid answer.`);
+        }
+      });
+
+      const scores = {};
+
+      Object.entries(categories).forEach(([key, category]) => {
+        scores[key] = category.questions.reduce((total, questionIndex) => {
+          return total + answers[questionIndex - 1];
+        }, 0);
+      });
+
+      const ranked = Object.entries(scores)
+        .map(([key, score]) => {
+          const categoryAnswers = categories[key].questions.map((questionIndex) => answers[questionIndex - 1]);
+          const ratingCounts = {};
+          for (let rating = 5; rating >= 1; rating -= 1) {
+            ratingCounts[rating] = categoryAnswers.filter((answer) => answer === rating).length;
+          }
+          return { key, score, ratingCounts };
+        })
+        .sort((a, b) => {
+          if (b.score !== a.score) return b.score - a.score;
+
+          for (let rating = 5; rating >= 1; rating -= 1) {
+            if (b.ratingCounts[rating] !== a.ratingCounts[rating]) {
+              return b.ratingCounts[rating] - a.ratingCounts[rating];
+            }
+          }
+
+          return CATEGORY_TIE_BREAK_PRIORITY.indexOf(a.key) - CATEGORY_TIE_BREAK_PRIORITY.indexOf(b.key);
+      });
+
+      const primary = [ranked[0]];
+
+      return { scores, ranked, primary };
+    }
+
+    function validateAssessmentStructure() {
+      if (questions.length !== 40) {
+        throw new Error("The assessment must contain exactly 40 questions.");
+      }
+
+      const assignedQuestions = [];
+
+      Object.values(categories).forEach((category) => {
+        if (category.questions.length !== 8) {
+          throw new Error(`${category.label} must contain exactly eight questions.`);
+        }
+        assignedQuestions.push(...category.questions);
+      });
+
+      const sorted = assignedQuestions.slice().sort((a, b) => a - b);
+      const expected = Array.from({ length: 40 }, (_, index) => index + 1);
+
+      const isExactMatch = sorted.length === expected.length && sorted.every((value, index) => value === expected[index]);
+      if (!isExactMatch) {
+        throw new Error("Every question must be assigned once and only once.");
+      }
+    }
+
+    function getResultPresentation(results) {
+      const primaryCategories = results.primary.map((item) => categories[item.key]);
+      const primaryTitle = primaryCategories[0].label;
+      const primaryDescription = primaryCategories[0].description;
+      const resultFieldValue = `${primaryCategories[0].label} (${primaryCategories[0].colorName})`;
+
+      return {
+        primaryCategories,
+        primaryTitle,
+        primaryDescription,
+        resultFieldValue
+      };
+    }
+
+    function buildScoreRows(results) {
+      return results.ranked.map((item) => {
+        const category = categories[item.key];
+        const scorePercent = Math.round((item.score / 40) * 100);
+        return `
+          <div class="score-row" aria-label="${category.label}: ${item.score} out of 40">
+            <div class="score-row-head">
+              <div class="score-name-wrap">
+                <span class="score-swatch" style="--score-color:${category.color};" aria-hidden="true"></span>
+                <div class="score-name">${category.label}</div>
+                <div class="score-meta">${category.colorName}</div>
+              </div>
+              <div class="score-value">${item.score}/40</div>
+            </div>
+            <div class="score-track" aria-hidden="true">
+              <div class="score-fill" style="--score-width:${scorePercent}%;--score-color:${category.color};"></div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderPreSubmissionResults(results) {
+      const presentation = getResultPresentation(results);
+
+      document.getElementById("previewPrimaryTitle").textContent = presentation.primaryTitle;
+      document.getElementById("previewPrimaryDescription").textContent = presentation.primaryDescription;
+      document.getElementById("previewResultHero").style.setProperty(
+        "--profile-color",
+        presentation.primaryCategories[0].color
+      );
+      document.getElementById("previewScoreList").innerHTML = buildScoreRows(results);
+
+      esiResult.value = presentation.resultFieldValue;
+      state.participant = {
+        ...(state.participant || {}),
+        esiResult: presentation.resultFieldValue
+      };
+    }
+
+    function collectParticipantData() {
+      const data = new FormData(participantForm);
+      return {
+        fullName: String(data.get("fullName") || "").trim(),
+        email: String(data.get("email") || "").trim(),
+        school: String(data.get("school") || "").trim(),
+        position: String(data.get("position") || "").trim(),
+        experience: String(data.get("experience") || "").trim(),
+        esiResult: String(data.get("esiResult") || "").trim()
+      };
+    }
+
+    function buildSubmissionPayload(participant, results) {
+      const primaryLabels = results.primary.map((item) => categories[item.key].label);
+      const primaryColors = results.primary.map((item) => categories[item.key].colorName);
+
+      const payload = {
+        submissionId: `ESI-${Date.now()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`,
+        submittedAt: new Date().toISOString(),
+        fullName: participant.fullName,
+        email: participant.email,
+        school: participant.school,
+        position: participant.position,
+        experience: participant.experience,
+        esiResult: participant.esiResult || getResultPresentation(results).resultFieldValue,
+        sendResultsEmail: true,
+        primaryStrength: primaryLabels.join(" + "),
+        profileColor: primaryColors.join(" + "),
+        relationshipBuilderScore: results.scores.relationshipBuilder,
+        inspirationalLeaderScore: results.scores.inspirationalLeader,
+        innovativeEducatorScore: results.scores.innovativeEducator,
+        strategicPlannerScore: results.scores.strategicPlanner,
+        growthChampionScore: results.scores.growthChampion
+      };
+
+      state.answers.forEach((answer, index) => {
+        payload[`Q${index + 1}`] = answer;
+      });
+
+      return payload;
+    }
+
+    async function submitPreview(payload) {
+      localStorage.setItem("esi-last-local-submission", JSON.stringify(payload));
+      return { mode: "local" };
+    }
+
+    function restoreParticipantFields() {
+      const participant = state.participant || {};
+      ["fullName", "email", "school", "position", "experience"].forEach((field) => {
+        if (participant[field]) {
+          document.getElementById(field).value = participant[field];
+        }
+      });
+    }
+
+    startButton.addEventListener("click", () => {
+      state.currentQuestion = state.answers.findIndex((value) => value === null);
+      if (state.currentQuestion === -1) state.currentQuestion = 0;
+      renderQuestion();
+      showScreen("question");
+    });
+
+    backButton.addEventListener("click", () => {
+      clearAdvanceCountdown();
+      if (state.currentQuestion > 0) {
+        state.currentQuestion -= 1;
+        renderQuestion();
+      }
+    });
+
+    nextButton.addEventListener("click", () => {
+      if (state.answers[state.currentQuestion] === null) return;
+      moveForward();
+    });
+
+    reviewBackButton.addEventListener("click", () => {
+      clearAdvanceCountdown();
+      clearResultCountdown();
+      state.currentQuestion = questions.length - 1;
+      renderQuestion();
+      showScreen("question");
+    });
+
+    participantForm.addEventListener("input", () => {
+      state.participant = collectParticipantData();
+    });
+
+    participantForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      formError.style.display = "none";
+      formSuccess.style.display = "none";
+
+      if (!participantForm.checkValidity()) {
+        participantForm.reportValidity();
+        formError.textContent = "Please complete every required field before submitting.";
+        formError.style.display = "block";
+        return;
+      }
+
+      if (state.answers.some((value) => value === null)) {
+        formError.textContent = "All 40 statements must be answered before submitting.";
+        formError.style.display = "block";
+        return;
+      }
+
+      let results;
+      let participant;
+
+      try {
+        participant = collectParticipantData();
+        results = latestResults || calculateScores(state.answers);
+      } catch (error) {
+        formError.textContent = error.message;
+        formError.style.display = "block";
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending...";
+
+      try {
+        const payload = buildSubmissionPayload(participant, results);
+        await submitPreview(payload);
+
+        formSuccess.textContent = "Preview complete. Connect the GoHighLevel form to send and email future results.";
+        formSuccess.style.display = "block";
+        formSuccess.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      } catch (error) {
+        formError.textContent = error.message || "The record could not be saved. Please try again.";
+        formError.style.display = "block";
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Send My Results";
+      }
+    });
+
+    scoringTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => scoringDialog.showModal());
+    });
+
+    closeScoringDialog.addEventListener("click", () => scoringDialog.close());
+
+    scoringDialog.addEventListener("click", (event) => {
+      if (event.target === scoringDialog) {
+        scoringDialog.close();
+      }
+    });
+
+    window.addEventListener("beforeunload", (event) => {
+      const hasProgress = state.answers.some((value) => value !== null);
+      const isComplete = state.answers.every((value) => value !== null);
+      if (hasProgress && !isComplete) {
+        event.preventDefault();
+        event.returnValue = "";
+      }
+    });
+
+    localStorage.removeItem("esi-assessment-progress-v2");
+    validateAssessmentStructure();
+  </script>
+</body>
+</html>
