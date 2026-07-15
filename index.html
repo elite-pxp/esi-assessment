@@ -651,6 +651,13 @@
       background: #f8fafc;
     }
 
+    .result-summary-grid {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+      gap: 28px;
+      align-items: start;
+    }
+
     .result-label {
       margin-bottom: 6px;
       color: var(--muted);
@@ -681,6 +688,10 @@
       grid-template-columns: 1fr;
       gap: 11px;
       margin-top: 20px;
+    }
+
+    .result-summary-grid .score-list {
+      margin-top: 0;
     }
 
     .score-row {
@@ -971,6 +982,11 @@
         position: static;
       }
 
+      .result-summary-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
       .info-grid,
       .scale-list,
       .field-grid.two-column,
@@ -1139,13 +1155,15 @@
           </p>
         </div>
         <div class="card-body">
-          <div id="previewResultHero" class="result-hero">
-            <div class="result-label">Primary Educator Strength</div>
-            <h3 id="previewPrimaryTitle" class="result-title"></h3>
-            <p id="previewPrimaryDescription"></p>
-          </div>
+          <div class="result-summary-grid">
+            <div id="previewResultHero" class="result-hero">
+              <div class="result-label">Primary Educator Strength</div>
+              <h3 id="previewPrimaryTitle" class="result-title"></h3>
+              <p id="previewPrimaryDescription"></p>
+            </div>
 
-          <div class="score-list" id="previewScoreList"></div>
+            <div class="score-list" id="previewScoreList"></div>
+          </div>
 
           <div class="form-intro">
             <p class="eyebrow">Send My Results</p>
