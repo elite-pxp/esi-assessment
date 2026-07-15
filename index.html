@@ -79,6 +79,21 @@
       gap: 8px;
     }
 
+    .start-over-trigger {
+      color: var(--danger);
+      border-color: rgba(180, 35, 24, 0.24);
+      background: #fff7f6;
+    }
+
+    .start-over-trigger:hover {
+      border-color: rgba(180, 35, 24, 0.42);
+      background: #fff1f0;
+    }
+
+    .start-over-trigger[hidden] {
+      display: none !important;
+    }
+
     .brand-mark {
       display: grid;
       place-items: center;
@@ -782,6 +797,64 @@
       backdrop-filter: blur(4px);
     }
 
+    .start-over-dialog {
+      width: min(calc(100% - 28px), 460px);
+      margin: auto;
+      padding: 0;
+      border: 1px solid rgba(21, 35, 59, 0.18);
+      border-radius: 12px;
+      color: var(--ink);
+      background: var(--white);
+      box-shadow: 0 24px 80px rgba(21, 35, 59, 0.3);
+    }
+
+    .start-over-dialog::backdrop {
+      background: rgba(15, 23, 42, 0.64);
+      backdrop-filter: blur(3px);
+    }
+
+    .start-over-dialog-inner {
+      padding: 26px 24px 20px;
+    }
+
+    .start-over-dialog h2 {
+      margin-bottom: 8px;
+      font-size: 1.08rem;
+      letter-spacing: -0.01em;
+    }
+
+    .start-over-dialog p {
+      margin: 0;
+      color: #526987;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .start-over-dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .start-over-dialog-actions .btn {
+      min-height: 42px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+    }
+
+    .btn-danger {
+      color: var(--white);
+      background: var(--danger);
+      border-color: var(--danger);
+    }
+
+    .btn-danger:hover {
+      background: #912018;
+      border-color: #912018;
+    }
+
     .scoring-dialog-inner {
       position: relative;
       padding: 38px;
@@ -917,12 +990,20 @@
       }
 
       .brand-actions {
-        flex-direction: column-reverse;
+        flex-direction: column;
         align-items: flex-end;
+      }
+
+      .start-over-trigger {
+        order: -1;
       }
 
       .scoring-dialog-inner {
         padding: 34px 22px 28px;
+      }
+
+      .start-over-dialog-inner {
+        padding: 24px 20px 18px;
       }
     }
 
@@ -956,6 +1037,9 @@
           <span class="status-dot" aria-hidden="true"></span>
           40 Questions
         </div>
+        <button id="startOverButton" class="status-pill start-over-trigger" type="button" aria-haspopup="dialog" hidden>
+          Start over
+        </button>
       </div>
     </div>
 
@@ -1139,6 +1223,22 @@
     </div>
   </dialog>
 
+  <dialog
+    id="startOverDialog"
+    class="start-over-dialog"
+    aria-labelledby="startOverDialogTitle"
+    aria-describedby="startOverDialogDescription"
+  >
+    <div class="start-over-dialog-inner">
+      <h2 id="startOverDialogTitle">Start Over?</h2>
+      <p id="startOverDialogDescription">Are you sure you want to clear all progress and start over? This action cannot be undone.</p>
+      <div class="start-over-dialog-actions">
+        <button id="cancelStartOverButton" class="btn btn-secondary" type="button">Cancel</button>
+        <button id="confirmStartOverButton" class="btn btn-danger" type="button">Yes, start over</button>
+      </div>
+    </div>
+  </dialog>
+
   <script src="https://link.eliteschildren.org/js/form_embed.js"></script>
   <script>
     "use strict";
@@ -1259,6 +1359,10 @@
     const backButton = document.getElementById("backButton");
     const nextButton = document.getElementById("nextButton");
     const reviewBackButton = document.getElementById("reviewBackButton");
+    const startOverButton = document.getElementById("startOverButton");
+    const startOverDialog = document.getElementById("startOverDialog");
+    const cancelStartOverButton = document.getElementById("cancelStartOverButton");
+    const confirmStartOverButton = document.getElementById("confirmStartOverButton");
     const ghlFormFrame = document.getElementById("inline-0S0jyfclu3SockPSSiLn");
     const scoringDialog = document.getElementById("scoringDialog");
     const closeScoringDialog = document.getElementById("closeScoringDialog");
@@ -1305,6 +1409,33 @@
       answerList.querySelectorAll("input[type='radio']").forEach((input) => {
         input.checked = false;
       });
+    }
+
+    function resetAssessment() {
+      clearAdvanceCountdown();
+      clearResultCountdown();
+
+      latestResults = null;
+      state = {
+        currentQuestion: 0,
+        answers: Array(questions.length).fill(null)
+      };
+
+      answerList.innerHTML = "";
+      progressText.textContent = `1 / ${questions.length}`;
+      progressPercent.textContent = "3%";
+      progressBar.style.width = "3%";
+      document.getElementById("previewPrimaryTitle").textContent = "";
+      document.getElementById("previewPrimaryDescription").textContent = "";
+      document.getElementById("previewScoreList").innerHTML = "";
+      formError.textContent = "";
+      formError.style.display = "none";
+      ghlFormFrame.src = GHL_FORM_BASE_URL;
+      ghlFormFrame.title = "Educator Strength Result";
+      startOverButton.hidden = true;
+      startOverDialog.close();
+      showScreen("welcome");
+      startButton.focus();
     }
 
     function moveForward() {
@@ -1557,6 +1688,7 @@
     startButton.addEventListener("click", () => {
       state.currentQuestion = state.answers.findIndex((value) => value === null);
       if (state.currentQuestion === -1) state.currentQuestion = 0;
+      startOverButton.hidden = false;
       renderQuestion();
       showScreen("question");
     });
@@ -1580,6 +1712,27 @@
       state.currentQuestion = questions.length - 1;
       renderQuestion();
       showScreen("question");
+    });
+
+    startOverButton.addEventListener("click", () => {
+      clearAdvanceCountdown();
+
+      if (screens.question.classList.contains("active")) {
+        const actionLabel = state.currentQuestion === questions.length - 1 ? "Continue" : "Next";
+        nextButton.textContent = actionLabel;
+        nextButton.disabled = state.answers[state.currentQuestion] === null;
+      }
+
+      startOverDialog.showModal();
+    });
+
+    cancelStartOverButton.addEventListener("click", () => startOverDialog.close());
+    confirmStartOverButton.addEventListener("click", resetAssessment);
+
+    startOverDialog.addEventListener("click", (event) => {
+      if (event.target === startOverDialog) {
+        startOverDialog.close();
+      }
     });
 
     scoringTriggers.forEach((trigger) => {
