@@ -2,3 +2,6 @@
 output/
 .DS_Store
 ._*
+
+# Local-only GoHighLevel review page
+form-preview.html

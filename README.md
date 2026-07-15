@@ -71,9 +71,9 @@ The read-only form field named **Educator Strength Result** receives one text va
 1. The participant answers all 40 statements.
 2. A three-second calculation screen appears.
 3. The single primary result and five-score breakdown are displayed.
-4. The result text is automatically placed in the read-only result field.
+4. The result text is automatically mapped into the embedded GoHighLevel result field.
 5. The participant enters their contact information and submits the form.
-6. Once the GoHighLevel form is connected, GoHighLevel receives the prefilled result and sends the configured workflow email.
+6. GoHighLevel receives the prefilled result and can send the configured workflow email.
 
 The assessment page also includes a **How scoring works** FAQ dialog in the top bar and footer. It explains the same one-result calculation and color identities directly to participants.
 
@@ -105,7 +105,14 @@ Create these fields in this order:
 8. **Submit button**
    - `Send My Results`
 
-After creating the form, provide its embed code and the unique key or field ID for **Educator Strength Result**. The current form is a local preview until that embed is connected.
+The connected GoHighLevel form uses:
+
+- Form ID: `0S0jyfclu3SockPSSiLn`
+- Result custom-field ID: `ngUeLYN7ddhssOjLvEwI`
+- Result custom-field key: `contact.educator_strength_result`
+- Form prefill parameter: `single_line_773jh`
+
+The assessment adds the calculated result to the iframe URL using the prefill parameter. For example, `single_line_773jh=Growth Champion (Purple)` populates the GHL result field before submission. Email delivery still depends on an active GoHighLevel workflow triggered by this form submission.
 
 ## Run locally
 

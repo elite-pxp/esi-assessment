@@ -612,6 +612,27 @@
       border-color: rgba(21, 35, 59, 0.2) !important;
     }
 
+    .ghl-form-shell {
+      min-height: 635px;
+      margin-top: 22px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--white);
+    }
+
+    .ghl-form-frame {
+      display: block;
+      width: 100%;
+      height: 635px;
+      border: 0;
+      border-radius: 16px;
+    }
+
+    .ghl-form-actions {
+      margin-top: 18px;
+    }
+
     @keyframes calculate-spin {
       to {
         transform: rotate(360deg);
@@ -1055,76 +1076,31 @@
             <p class="lead" style="font-size: 0.94rem;">Your result is already filled in below. Complete the remaining fields and press send.</p>
           </div>
 
-          <form id="participantForm" novalidate>
-            <div class="field-grid two-column">
-              <div class="field-group field-span-two">
-                <label for="esiResult">Educator Strength Result</label>
-                <input id="esiResult" class="result-field" name="esiResult" type="text" readonly required aria-readonly="true" />
-                <p class="helper">This text field will map directly to your GoHighLevel contact custom field.</p>
-              </div>
+          <div id="formError" class="error-box" role="alert"></div>
 
-              <div class="field-group">
-                <label for="fullName">Full Name</label>
-                <input id="fullName" name="fullName" type="text" autocomplete="name" required />
-              </div>
+          <div class="ghl-form-shell">
+            <iframe
+              src="https://link.eliteschildren.org/widget/form/0S0jyfclu3SockPSSiLn"
+              class="ghl-form-frame"
+              id="inline-0S0jyfclu3SockPSSiLn"
+              data-layout="{'id':'INLINE'}"
+              data-trigger-type="alwaysShow"
+              data-trigger-value=""
+              data-activation-type="alwaysActivated"
+              data-activation-value=""
+              data-deactivation-type="neverDeactivate"
+              data-deactivation-value=""
+              data-form-name="Educator Strength Result"
+              data-height="635"
+              data-layout-iframe-id="inline-0S0jyfclu3SockPSSiLn"
+              data-form-id="0S0jyfclu3SockPSSiLn"
+              title="Educator Strength Result"
+            ></iframe>
+          </div>
 
-              <div class="field-group">
-                <label for="email">Email Address for Your Results</label>
-                <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required />
-                <p class="helper">We will send your primary strength and category scores to this address.</p>
-              </div>
-
-              <div class="field-group">
-                <label for="school">School</label>
-                <select id="school" name="school" required>
-                  <option value="">Select your school</option>
-                  <option value="Austell">Austell</option>
-                  <option value="Mableton">Mableton</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-
-              <div class="field-group">
-                <label for="position">Position</label>
-                <select id="position" name="position" required>
-                  <option value="">Select your position</option>
-                  <option value="Teacher">Teacher</option>
-                  <option value="Lead Teacher">Lead Teacher</option>
-                  <option value="Assistant Teacher">Assistant Teacher</option>
-                  <option value="Director">Director</option>
-                  <option value="Assistant Director">Assistant Director</option>
-                  <option value="Administrator">Administrator</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-
-              <div class="field-group">
-                <label for="experience">Years of Experience</label>
-                <select id="experience" name="experience" required>
-                  <option value="">Select a range</option>
-                  <option value="Less than 1 year">Less than 1 year</option>
-                  <option value="1 to 2 years">1 to 2 years</option>
-                  <option value="3 to 5 years">3 to 5 years</option>
-                  <option value="6 to 10 years">6 to 10 years</option>
-                  <option value="11 to 15 years">11 to 15 years</option>
-                  <option value="16 years or more">16 years or more</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="checkbox-row">
-              <input id="honestyCheck" name="honestyCheck" type="checkbox" required />
-              <label for="honestyCheck">I confirm that I answered the assessment honestly and completed all 40 statements.</label>
-            </div>
-
-            <div id="formError" class="error-box" role="alert"></div>
-            <div id="formSuccess" class="success-box" role="status"></div>
-
-            <div class="button-row sticky-actions">
-              <button id="reviewBackButton" class="btn btn-secondary" type="button">Back</button>
-              <button id="submitButton" class="btn btn-primary" type="submit">Send My Results</button>
-            </div>
-          </form>
+          <div class="button-row ghl-form-actions">
+            <button id="reviewBackButton" class="btn btn-secondary" type="button">Back to My Answers</button>
+          </div>
         </div>
       </div>
     </section>
@@ -1163,6 +1139,7 @@
     </div>
   </dialog>
 
+  <script src="https://link.eliteschildren.org/js/form_embed.js"></script>
   <script>
     "use strict";
 
@@ -1268,6 +1245,9 @@
       "growthChampion"
     ];
 
+    const GHL_FORM_BASE_URL = "https://link.eliteschildren.org/widget/form/0S0jyfclu3SockPSSiLn";
+    const GHL_RESULT_FIELD_PARAMETER = "single_line_773jh";
+
     const screens = {
       welcome: document.getElementById("welcomeScreen"),
       question: document.getElementById("questionScreen"),
@@ -1279,8 +1259,7 @@
     const backButton = document.getElementById("backButton");
     const nextButton = document.getElementById("nextButton");
     const reviewBackButton = document.getElementById("reviewBackButton");
-    const participantForm = document.getElementById("participantForm");
-    const submitButton = document.getElementById("submitButton");
+    const ghlFormFrame = document.getElementById("inline-0S0jyfclu3SockPSSiLn");
     const scoringDialog = document.getElementById("scoringDialog");
     const closeScoringDialog = document.getElementById("closeScoringDialog");
     const scoringTriggers = document.querySelectorAll("[data-open-scoring]");
@@ -1292,10 +1271,7 @@
     const progressBar = document.getElementById("progressBar");
     const calculationCountdown = document.getElementById("calculationCountdown");
     const calculationStatus = document.getElementById("calculationStatus");
-    const esiResult = document.getElementById("esiResult");
-
     const formError = document.getElementById("formError");
-    const formSuccess = document.getElementById("formSuccess");
 
     let advanceTimer = null;
     let countdownInterval = null;
@@ -1304,8 +1280,7 @@
 
     let state = {
       currentQuestion: 0,
-      answers: Array(questions.length).fill(null),
-      participant: {}
+      answers: Array(questions.length).fill(null)
     };
 
     function showScreen(name) {
@@ -1353,7 +1328,6 @@
       } catch (error) {
         formError.textContent = error.message;
         formError.style.display = "block";
-        restoreParticipantFields();
         showScreen("details");
         return;
       }
@@ -1380,7 +1354,6 @@
 
         clearResultCountdown();
         renderPreSubmissionResults(latestResults);
-        restoreParticipantFields();
         showScreen("details");
       }, 1000);
     }
@@ -1574,67 +1547,11 @@
       );
       document.getElementById("previewScoreList").innerHTML = buildScoreRows(results);
 
-      esiResult.value = presentation.resultFieldValue;
-      state.participant = {
-        ...(state.participant || {}),
-        esiResult: presentation.resultFieldValue
-      };
-    }
-
-    function collectParticipantData() {
-      const data = new FormData(participantForm);
-      return {
-        fullName: String(data.get("fullName") || "").trim(),
-        email: String(data.get("email") || "").trim(),
-        school: String(data.get("school") || "").trim(),
-        position: String(data.get("position") || "").trim(),
-        experience: String(data.get("experience") || "").trim(),
-        esiResult: String(data.get("esiResult") || "").trim()
-      };
-    }
-
-    function buildSubmissionPayload(participant, results) {
-      const primaryLabels = results.primary.map((item) => categories[item.key].label);
-      const primaryColors = results.primary.map((item) => categories[item.key].colorName);
-
-      const payload = {
-        submissionId: `ESI-${Date.now()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`,
-        submittedAt: new Date().toISOString(),
-        fullName: participant.fullName,
-        email: participant.email,
-        school: participant.school,
-        position: participant.position,
-        experience: participant.experience,
-        esiResult: participant.esiResult || getResultPresentation(results).resultFieldValue,
-        sendResultsEmail: true,
-        primaryStrength: primaryLabels.join(" + "),
-        profileColor: primaryColors.join(" + "),
-        relationshipBuilderScore: results.scores.relationshipBuilder,
-        inspirationalLeaderScore: results.scores.inspirationalLeader,
-        innovativeEducatorScore: results.scores.innovativeEducator,
-        strategicPlannerScore: results.scores.strategicPlanner,
-        growthChampionScore: results.scores.growthChampion
-      };
-
-      state.answers.forEach((answer, index) => {
-        payload[`Q${index + 1}`] = answer;
-      });
-
-      return payload;
-    }
-
-    async function submitPreview(payload) {
-      localStorage.setItem("esi-last-local-submission", JSON.stringify(payload));
-      return { mode: "local" };
-    }
-
-    function restoreParticipantFields() {
-      const participant = state.participant || {};
-      ["fullName", "email", "school", "position", "experience"].forEach((field) => {
-        if (participant[field]) {
-          document.getElementById(field).value = participant[field];
-        }
-      });
+      const ghlFormUrl = new URL(GHL_FORM_BASE_URL);
+      ghlFormUrl.searchParams.set(GHL_RESULT_FIELD_PARAMETER, presentation.resultFieldValue);
+      ghlFormFrame.src = ghlFormUrl.toString();
+      ghlFormFrame.title = `Educator Strength Result – ${presentation.resultFieldValue}`;
+      formError.style.display = "none";
     }
 
     startButton.addEventListener("click", () => {
@@ -1663,59 +1580,6 @@
       state.currentQuestion = questions.length - 1;
       renderQuestion();
       showScreen("question");
-    });
-
-    participantForm.addEventListener("input", () => {
-      state.participant = collectParticipantData();
-    });
-
-    participantForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      formError.style.display = "none";
-      formSuccess.style.display = "none";
-
-      if (!participantForm.checkValidity()) {
-        participantForm.reportValidity();
-        formError.textContent = "Please complete every required field before submitting.";
-        formError.style.display = "block";
-        return;
-      }
-
-      if (state.answers.some((value) => value === null)) {
-        formError.textContent = "All 40 statements must be answered before submitting.";
-        formError.style.display = "block";
-        return;
-      }
-
-      let results;
-      let participant;
-
-      try {
-        participant = collectParticipantData();
-        results = latestResults || calculateScores(state.answers);
-      } catch (error) {
-        formError.textContent = error.message;
-        formError.style.display = "block";
-        return;
-      }
-
-      submitButton.disabled = true;
-      submitButton.textContent = "Sending...";
-
-      try {
-        const payload = buildSubmissionPayload(participant, results);
-        await submitPreview(payload);
-
-        formSuccess.textContent = "Preview complete. Connect the GoHighLevel form to send and email future results.";
-        formSuccess.style.display = "block";
-        formSuccess.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      } catch (error) {
-        formError.textContent = error.message || "The record could not be saved. Please try again.";
-        formError.style.display = "block";
-      } finally {
-        submitButton.disabled = false;
-        submitButton.textContent = "Send My Results";
-      }
     });
 
     scoringTriggers.forEach((trigger) => {
