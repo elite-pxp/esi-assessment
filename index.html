@@ -598,10 +598,22 @@
       text-align: center;
     }
 
+    .form-delivery-section {
+      margin-top: 34px;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: #f8fafc;
+    }
+
     .form-intro {
-      margin: 34px 0 0;
-      padding-top: 30px;
-      border-top: 1px solid var(--line);
+      margin: 0 0 24px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .form-intro .lead {
+      max-width: 70ch;
     }
 
     .field-span-two {
@@ -616,20 +628,21 @@
     }
 
     .ghl-form-shell {
-      min-height: 635px;
-      margin-top: 22px;
+      min-height: 997px;
+      padding: 10px;
       overflow: hidden;
       border: 1px solid var(--line);
       border-radius: 16px;
-      background: var(--white);
+      background: #eef2f7;
     }
 
     .ghl-form-frame {
       display: block;
       width: 100%;
-      height: 635px;
+      height: 977px;
       border: 0;
-      border-radius: 16px;
+      border-radius: 12px;
+      background: var(--white);
     }
 
     .ghl-form-actions {
@@ -643,19 +656,19 @@
     }
 
     .result-hero {
-      padding: 17px 20px;
+      padding: 20px;
       border: 1px solid var(--line);
-      border-left: 4px solid var(--profile-color, var(--navy));
+      border-top: 4px solid var(--profile-color, var(--navy));
       border-radius: 14px;
       color: var(--ink);
-      background: #f8fafc;
+      background: var(--white);
     }
 
     .result-summary-grid {
       display: grid;
-      grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 28px;
-      align-items: start;
+      align-items: stretch;
     }
 
     .result-label {
@@ -688,10 +701,6 @@
       grid-template-columns: 1fr;
       gap: 11px;
       margin-top: 20px;
-    }
-
-    .result-summary-grid .score-list {
-      margin-top: 0;
     }
 
     .score-row {
@@ -973,6 +982,10 @@
         padding: 28px;
       }
 
+      .form-delivery-section {
+        padding: 24px;
+      }
+
       .question-layout {
         grid-template-columns: 1fr;
         gap: 24px;
@@ -983,7 +996,6 @@
       }
 
       .result-summary-grid {
-        grid-template-columns: 1fr;
         gap: 20px;
       }
 
@@ -997,13 +1009,157 @@
     }
 
     @media (max-width: 620px) {
+      .app-shell {
+        padding: 12px 10px 24px;
+      }
+
       .brand-bar {
-        align-items: flex-start;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      .brand-lockup {
+        gap: 9px;
+        min-width: 0;
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
+        font-size: 0.88rem;
+      }
+
+      .brand-copy strong {
+        font-size: 0.85rem;
+        line-height: 1.12;
+      }
+
+      .brand-copy span {
+        display: none;
       }
 
       .brand-actions {
-        flex-direction: column;
-        align-items: flex-end;
+        flex-direction: row;
+        flex: 0 0 auto;
+      }
+
+      .brand-actions > .status-pill:not(.start-over-trigger) {
+        display: none;
+      }
+
+      .status-pill {
+        min-height: 38px;
+        padding: 7px 11px;
+        font-size: 0.74rem;
+      }
+
+      .card {
+        border-radius: 18px;
+      }
+
+      #questionScreen .card-body {
+        padding: 16px;
+      }
+
+      #questionScreen .progress-wrap {
+        margin-bottom: 14px;
+      }
+
+      #questionScreen .progress-meta {
+        margin-bottom: 6px;
+        font-size: 0.76rem;
+      }
+
+      #questionScreen .progress-track {
+        height: 8px;
+      }
+
+      #questionScreen .question-layout {
+        gap: 12px;
+      }
+
+      #questionScreen .question-copy {
+        padding: 16px;
+        border-radius: 14px;
+      }
+
+      #questionScreen .question-copy .eyebrow {
+        margin-bottom: 8px;
+        font-size: 0.68rem;
+        line-height: 1.3;
+      }
+
+      #questionScreen .question-text {
+        margin-bottom: 0;
+        font-size: clamp(1.35rem, 7vw, 1.65rem);
+        line-height: 1.16;
+        letter-spacing: -0.025em;
+      }
+
+      #questionScreen .helper {
+        display: none;
+      }
+
+      #questionScreen .answer-list {
+        gap: 7px;
+      }
+
+      #questionScreen .answer-option label {
+        gap: 10px;
+        min-height: 48px;
+        padding: 7px 10px;
+        border-radius: 11px;
+        font-size: 0.9rem;
+      }
+
+      #questionScreen .answer-score {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+      }
+
+      #questionScreen .button-row.sticky-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 10px;
+        padding-top: 10px;
+      }
+
+      #questionScreen .sticky-actions .btn {
+        width: 100%;
+        min-height: 44px;
+        padding: 8px 10px;
+        border-radius: 11px;
+        font-size: 0.88rem;
+      }
+
+      .result-summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-delivery-section {
+        margin-top: 28px;
+        padding: 16px;
+        border-radius: 16px;
+      }
+
+      .form-intro {
+        margin-bottom: 18px;
+        padding-bottom: 18px;
+      }
+
+      .ghl-form-shell {
+        min-height: 989px;
+        padding: 6px;
+        border-radius: 14px;
+      }
+
+      .ghl-form-frame {
+        height: 977px;
+        border-radius: 10px;
       }
 
       .start-over-trigger {
@@ -1157,41 +1313,49 @@
         <div class="card-body">
           <div class="result-summary-grid">
             <div id="previewResultHero" class="result-hero">
-              <div class="result-label">Primary Educator Strength</div>
+              <div class="result-label">Primary Strength</div>
               <h3 id="previewPrimaryTitle" class="result-title"></h3>
               <p id="previewPrimaryDescription"></p>
             </div>
 
-            <div class="score-list" id="previewScoreList"></div>
+            <div id="previewSupportingHero" class="result-hero">
+              <div class="result-label">Supporting Strength</div>
+              <h3 id="previewSupportingTitle" class="result-title"></h3>
+              <p id="previewSupportingDescription"></p>
+            </div>
           </div>
 
-          <div class="form-intro">
-            <p class="eyebrow">Send My Results</p>
-            <h3>Where should we send your result?</h3>
-            <p class="lead" style="font-size: 0.94rem;">Your result is already filled in below. Complete the remaining fields and press send.</p>
-          </div>
+          <div class="score-list" id="previewScoreList"></div>
 
-          <div id="formError" class="error-box" role="alert"></div>
+          <section class="form-delivery-section" aria-labelledby="deliveryFormTitle">
+            <div class="form-intro">
+              <p class="eyebrow">Send My Results</p>
+              <h3 id="deliveryFormTitle">Where should we send your result?</h3>
+              <p class="lead" style="font-size: 0.94rem;">Your result is already filled in below. Complete the remaining fields and press send.</p>
+            </div>
 
-          <div class="ghl-form-shell">
-            <iframe
-              src="https://link.eliteschildren.org/widget/form/0S0jyfclu3SockPSSiLn"
-              class="ghl-form-frame"
-              id="inline-0S0jyfclu3SockPSSiLn"
-              data-layout="{'id':'INLINE'}"
-              data-trigger-type="alwaysShow"
-              data-trigger-value=""
-              data-activation-type="alwaysActivated"
-              data-activation-value=""
-              data-deactivation-type="neverDeactivate"
-              data-deactivation-value=""
-              data-form-name="Educator Strength Result"
-              data-height="635"
-              data-layout-iframe-id="inline-0S0jyfclu3SockPSSiLn"
-              data-form-id="0S0jyfclu3SockPSSiLn"
-              title="Educator Strength Result"
-            ></iframe>
-          </div>
+            <div id="formError" class="error-box" role="alert"></div>
+
+            <div class="ghl-form-shell">
+              <iframe
+                src="https://link.eliteschildren.org/widget/form/0S0jyfclu3SockPSSiLn"
+                class="ghl-form-frame"
+                id="inline-0S0jyfclu3SockPSSiLn"
+                data-layout="{'id':'INLINE'}"
+                data-trigger-type="alwaysShow"
+                data-trigger-value=""
+                data-activation-type="alwaysActivated"
+                data-activation-value=""
+                data-deactivation-type="neverDeactivate"
+                data-deactivation-value=""
+                data-form-name="Educator Strength Result ECLC"
+                data-height="977"
+                data-layout-iframe-id="inline-0S0jyfclu3SockPSSiLn"
+                data-form-id="0S0jyfclu3SockPSSiLn"
+                title="Educator Strength Result ECLC"
+              ></iframe>
+            </div>
+          </section>
 
           <div class="button-row ghl-form-actions">
             <button id="reviewBackButton" class="btn btn-secondary" type="button">Back to My Answers</button>
@@ -1211,12 +1375,13 @@
       <button id="closeScoringDialog" class="dialog-close" type="button" aria-label="Close scoring explanation">×</button>
       <p class="eyebrow">Scoring FAQ</p>
       <h2 id="scoringDialogTitle">How is my result calculated?</h2>
-      <p class="lead">The assessment produces one primary educator-strength result from your 40 responses.</p>
+      <p class="lead">The assessment produces one primary educator-strength result and identifies the next-highest category as a supporting strength.</p>
 
       <ol class="scoring-steps">
         <li>Each response receives a value from 1 for <strong>Strongly Disagree</strong> to 5 for <strong>Strongly Agree</strong>.</li>
         <li>Each strength has eight assigned questions. Those eight values are added to create a category score from 8 to 40.</li>
         <li>The category with the highest total becomes your one primary result.</li>
+        <li>The category ranked second is shown as your supporting strength.</li>
         <li>If totals are tied, the assessment compares the number of 5 responses, then 4s, 3s, 2s, and 1s.</li>
         <li>If the full response patterns are still identical, a fixed order is used: Relationship Builder, Innovative Educator, Inspirational Leader, Strategic Planner, then Growth Champion.</li>
       </ol>
@@ -1357,7 +1522,8 @@
     ];
 
     const GHL_FORM_BASE_URL = "https://link.eliteschildren.org/widget/form/0S0jyfclu3SockPSSiLn";
-    const GHL_RESULT_FIELD_PARAMETER = "single_line_773jh";
+    const GHL_PRIMARY_STRENGTH_FIELD_PARAMETER = "single_line_773jh";
+    const GHL_SUPPORTING_STRENGTH_FIELD_PARAMETER = "single_line_79bow";
 
     const screens = {
       welcome: document.getElementById("welcomeScreen"),
@@ -1438,11 +1604,13 @@
       progressBar.style.width = "3%";
       document.getElementById("previewPrimaryTitle").textContent = "";
       document.getElementById("previewPrimaryDescription").textContent = "";
+      document.getElementById("previewSupportingTitle").textContent = "";
+      document.getElementById("previewSupportingDescription").textContent = "";
       document.getElementById("previewScoreList").innerHTML = "";
       formError.textContent = "";
       formError.style.display = "none";
       ghlFormFrame.src = GHL_FORM_BASE_URL;
-      ghlFormFrame.title = "Educator Strength Result";
+      ghlFormFrame.title = "Educator Strength Result ECLC";
       startOverButton.hidden = true;
       startOverDialog.close();
       showScreen("welcome");
@@ -1615,8 +1783,9 @@
       });
 
       const primary = [ranked[0]];
+      const supporting = ranked[1];
 
-      return { scores, ranked, primary };
+      return { scores, ranked, primary, supporting };
     }
 
     function validateAssessmentStructure() {
@@ -1647,11 +1816,15 @@
       const primaryTitle = primaryCategories[0].label;
       const primaryDescription = primaryCategories[0].description;
       const resultFieldValue = `${primaryCategories[0].label} (${primaryCategories[0].colorName})`;
+      const supportingCategory = categories[results.supporting.key];
+      const supportingFieldValue = `${supportingCategory.label} (${supportingCategory.colorName})`;
 
       return {
         primaryCategories,
         primaryTitle,
         primaryDescription,
+        supportingCategory,
+        supportingFieldValue,
         resultFieldValue
       };
     }
@@ -1687,12 +1860,19 @@
         "--profile-color",
         presentation.primaryCategories[0].color
       );
+      document.getElementById("previewSupportingTitle").textContent = presentation.supportingFieldValue;
+      document.getElementById("previewSupportingDescription").textContent = presentation.supportingCategory.description;
+      document.getElementById("previewSupportingHero").style.setProperty(
+        "--profile-color",
+        presentation.supportingCategory.color
+      );
       document.getElementById("previewScoreList").innerHTML = buildScoreRows(results);
 
       const ghlFormUrl = new URL(GHL_FORM_BASE_URL);
-      ghlFormUrl.searchParams.set(GHL_RESULT_FIELD_PARAMETER, presentation.resultFieldValue);
+      ghlFormUrl.searchParams.set(GHL_PRIMARY_STRENGTH_FIELD_PARAMETER, presentation.resultFieldValue);
+      ghlFormUrl.searchParams.set(GHL_SUPPORTING_STRENGTH_FIELD_PARAMETER, presentation.supportingFieldValue);
       ghlFormFrame.src = ghlFormUrl.toString();
-      ghlFormFrame.title = `Educator Strength Result – ${presentation.resultFieldValue}`;
+      ghlFormFrame.title = `Educator Strength Result ECLC – ${presentation.resultFieldValue} and ${presentation.supportingFieldValue}`;
       formError.style.display = "none";
     }
 

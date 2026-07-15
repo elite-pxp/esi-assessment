@@ -1,6 +1,6 @@
 # Educator Strength Index™
 
-The Educator Strength Index (ESI) is a browser-based, 40-statement self-reflection assessment. It calculates one primary educator-strength result, displays its color identity, and prepares that text for a GoHighLevel form.
+The Educator Strength Index (ESI) is a browser-based, 40-statement self-reflection assessment. It calculates one primary educator-strength result, identifies the second-ranked category as a supporting strength, displays both color identities, and prepares the primary result text for a GoHighLevel form.
 
 ## How the assessment works
 
@@ -27,6 +27,8 @@ The 40 statements are divided evenly across five categories. Each category conta
 ## How one result is selected
 
 The assessment always returns exactly one primary result.
+
+The second-highest ranked category is displayed separately as the supporting strength. It adds context to the profile but does not replace or change the primary result sent to GoHighLevel.
 
 1. Add the eight answer values assigned to each category.
 2. Rank the five category totals from highest to lowest.
@@ -56,9 +58,9 @@ The result is `Growth Champion (Purple)` because 33 is the highest score.
 
 The page may still display all five scores as a transparent breakdown, but those scores are not additional results.
 
-## Auto-populated result format
+## Auto-populated strength format
 
-The read-only form field named **Educator Strength Result** receives one text value:
+The hidden **Primary Strength** and **Supporting Strength** form fields each receive one of these text values:
 
 - `Relationship Builder (Blue)`
 - `Innovative Educator (Green)`
@@ -70,10 +72,10 @@ The read-only form field named **Educator Strength Result** receives one text va
 
 1. The participant answers all 40 statements.
 2. A three-second calculation screen appears.
-3. The single primary result and five-score breakdown are displayed.
-4. The result text is automatically mapped into the embedded GoHighLevel result field.
+3. The primary and supporting results and five-score breakdown are displayed.
+4. Both strength values are automatically mapped into their hidden GoHighLevel fields.
 5. The participant enters their contact information and submits the form.
-6. GoHighLevel receives the prefilled result and can send the configured workflow email.
+6. GoHighLevel receives both prefilled strengths and can send the configured workflow email.
 
 The assessment page also includes a **How scoring works** FAQ dialog in the top bar and footer. It explains the same one-result calculation and color identities directly to participants.
 
@@ -81,38 +83,43 @@ The assessment page also includes a **How scoring works** FAQ dialog in the top 
 
 Create these fields in this order:
 
-1. **Educator Strength Result**
+1. **Primary Strength**
    - Contact custom field
    - Single Line text
-   - Required
-   - Visible
+   - Hidden
    - No default value
-2. **Full Name**
+2. **Supporting Strength**
+   - Contact custom field
+   - Single Line text
+   - Hidden
+   - No default value
+3. **Full Name**
    - Standard name field
    - Required
-3. **Email Address**
+4. **Email Address**
    - Standard email field
    - Required
-4. **School**
+5. **School**
    - Dropdown: Austell, Mableton, Other
-5. **Position**
+6. **Position**
    - Dropdown: Teacher, Lead Teacher, Assistant Teacher, Director, Assistant Director, Administrator, Other
-6. **Years of Experience**
+7. **Years of Experience**
    - Dropdown: Less than 1 year, 1 to 2 years, 3 to 5 years, 6 to 10 years, 11 to 15 years, 16 years or more
-7. **Confirmation**
+8. **Confirmation**
    - Required checkbox
    - `I confirm that I answered the assessment honestly and completed all 40 statements.`
-8. **Submit button**
+9. **Submit button**
    - `Send My Results`
 
 The connected GoHighLevel form uses:
 
 - Form ID: `0S0jyfclu3SockPSSiLn`
-- Result custom-field ID: `ngUeLYN7ddhssOjLvEwI`
-- Result custom-field key: `contact.educator_strength_result`
-- Form prefill parameter: `single_line_773jh`
+- Primary Strength field ID: `ngUeLYN7ddhssOjLvEwI`
+- Primary Strength prefill parameter: `single_line_773jh`
+- Supporting Strength field ID: `eeqyM6EEWUYbP7q65c4G`
+- Supporting Strength prefill parameter: `single_line_79bow`
 
-The assessment adds the calculated result to the iframe URL using the prefill parameter. For example, `single_line_773jh=Growth Champion (Purple)` populates the GHL result field before submission. Email delivery still depends on an active GoHighLevel workflow triggered by this form submission.
+The assessment adds both calculated strengths to the iframe URL using their prefill parameters. For example, `single_line_773jh=Relationship Builder (Blue)&single_line_79bow=Inspirational Leader (Red)` populates both hidden fields before submission. Email delivery still depends on an active GoHighLevel workflow triggered by this form submission.
 
 ## Run locally
 
