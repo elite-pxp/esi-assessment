@@ -643,40 +643,44 @@
     }
 
     .result-hero {
-      padding: 26px;
-      border-radius: 20px;
-      color: var(--white);
-      background: var(--profile-color, var(--navy));
+      padding: 17px 20px;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--profile-color, var(--navy));
+      border-radius: 14px;
+      color: var(--ink);
+      background: #f8fafc;
     }
 
     .result-label {
-      margin-bottom: 8px;
-      color: rgba(255, 255, 255, 0.78);
-      font-size: 0.78rem;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 0.7rem;
       font-weight: 800;
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
     .result-title {
-      margin-bottom: 10px;
-      color: var(--white);
-      font-size: clamp(1.9rem, 7vw, 3rem);
-      line-height: 1.08;
-      letter-spacing: -0.04em;
+      margin-bottom: 6px;
+      color: var(--navy);
+      font-size: clamp(1.3rem, 3vw, 1.7rem);
+      line-height: 1.18;
+      letter-spacing: -0.025em;
     }
 
     .result-hero p {
       margin-bottom: 0;
-      color: rgba(255, 255, 255, 0.9);
-      line-height: 1.6;
+      max-width: 76ch;
+      color: #526987;
+      font-size: 0.84rem;
+      line-height: 1.5;
     }
 
     .score-list {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 16px;
-      margin-top: 26px;
+      gap: 11px;
+      margin-top: 20px;
     }
 
     .score-row {
@@ -689,45 +693,45 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      margin-bottom: 7px;
+      margin-bottom: 4px;
     }
 
     .score-name-wrap {
       display: flex;
       align-items: center;
       min-width: 0;
-      gap: 8px;
+      gap: 7px;
     }
 
     .score-name {
       color: var(--navy);
-      font-size: 0.9rem;
+      font-size: 0.82rem;
       font-weight: 800;
     }
 
     .score-meta {
       color: var(--muted);
-      font-size: 0.74rem;
+      font-size: 0.7rem;
       white-space: nowrap;
     }
 
     .score-value {
       color: var(--navy);
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       font-weight: 900;
       white-space: nowrap;
     }
 
     .score-swatch {
-      width: 9px;
-      height: 9px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: var(--score-color);
       flex: 0 0 auto;
     }
 
     .score-track {
-      height: 7px;
+      height: 5px;
       border-radius: 999px;
       background: #e8edf3;
       overflow: hidden;
@@ -739,6 +743,10 @@
       border-radius: inherit;
       background: var(--score-color);
       transition: width 500ms ease;
+    }
+
+    #detailsScreen .card-body {
+      padding-top: 24px;
     }
 
     .privacy-note {
@@ -1655,7 +1663,7 @@
     function renderPreSubmissionResults(results) {
       const presentation = getResultPresentation(results);
 
-      document.getElementById("previewPrimaryTitle").textContent = presentation.primaryTitle;
+      document.getElementById("previewPrimaryTitle").textContent = presentation.resultFieldValue;
       document.getElementById("previewPrimaryDescription").textContent = presentation.primaryDescription;
       document.getElementById("previewResultHero").style.setProperty(
         "--profile-color",
